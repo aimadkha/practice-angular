@@ -1,0 +1,33 @@
+<div class="container">
+    <h2>Basic CRUD Operations</h2>
+
+    <form #postForm="ngForm" (ngSubmit)="onSubmit()" class="post-form">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" [(ngModel)]="currentPost.title" required class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="body">Body:</label>
+            <textarea id="body" name="body" [(ngModel)]="currentPost.body" required class="form-control"></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" [disabled]="!postForm.form.valid">
+                {{ isEditing ? 'Update' : 'Create' }} Post
+            </button>
+            <button type="button" *ngIf="isEditing" (click)="resetForm()">Cancel</button>
+        </div>
+    </form>
+
+    <div class="posts-list">
+        <div *ngFor="let post of posts" class="post-card">
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.body }}</p>
+            <div class="post-actions">
+                <button (click)="editPost(post)">Edit</button>
+                <button (click)="deletePost(post.id!)">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

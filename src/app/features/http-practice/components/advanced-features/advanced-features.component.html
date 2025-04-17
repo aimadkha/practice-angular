@@ -1,0 +1,77 @@
+<div class="container">
+    <h2>Advanced HTTP Features</h2>
+
+    <div class="error-message" *ngIf="error">
+        {{ error }}
+    </div>
+
+    <div class="demo-section">
+        <h3>Custom Headers Demo</h3>
+        <button (click)="demonstrateHeaders()">Test Headers</button>
+        <div class="results" *ngIf="postsWithHeaders.length">
+            <h4>Posts retrieved with custom headers:</h4>
+            <div class="post" *ngFor="let post of postsWithHeaders.slice(0,3)">
+                <h5>{{ post.title }}</h5>
+                <p>{{ post.body }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h3>URL Parameters Demo</h3>
+        <div class="params-form">
+            <div class="form-group">
+                <label for="userId">User ID:</label>
+                <input type="number" id="userId" [(ngModel)]="userId" min="1">
+            </div>
+            <div class="form-group">
+                <label for="start">Start Index:</label>
+                <input type="number" id="start" [(ngModel)]="startIndex" min="0">
+            </div>
+            <div class="form-group">
+                <label for="limit">Limit:</label>
+                <input type="number" id="limit" [(ngModel)]="limit" min="1">
+            </div>
+            <button (click)="demonstrateParams()">Test Parameters</button>
+        </div>
+        <div class="results" *ngIf="postsWithParams.length">
+            <h4>Posts retrieved with parameters:</h4>
+            <div class="post" *ngFor="let post of postsWithParams">
+                <h5>{{ post.title }}</h5>
+                <p>{{ post.body }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h3>Full Response Demo</h3>
+        <button (click)="demonstrateFullResponse()">Test Full Response</button>
+        <div class="results" *ngIf="fullResponse">
+            <h4>Full HTTP Response:</h4>
+            <div class="response-details">
+                <p><strong>Status:</strong> {{ fullResponse.status }}</p>
+                <p><strong>Status Text:</strong> {{ fullResponse.statusText }}</p>
+                <p><strong>URL:</strong> {{ fullResponse.url }}</p>
+                <p><strong>Headers:</strong></p>
+                <ul>
+                    <li *ngFor="let header of fullResponse.headers.keys()">
+                        {{ header }}: {{ fullResponse.headers.get(header) }}
+                    </li>
+                </ul>
+                <p><strong>Body:</strong> {{ fullResponse.body?.length }} items</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h3>Retry Strategy Demo</h3>
+        <button (click)="demonstrateRetry()">Test Retry</button>
+        <div class="results" *ngIf="retryResponse">
+            <h4>Posts retrieved with retry strategy:</h4>
+            <div class="post" *ngFor="let post of retryResponse.slice(0,3)">
+                <h5>{{ post.title }}</h5>
+                <p>{{ post.body }}</p>
+            </div>
+        </div>
+    </div>
+</div>
